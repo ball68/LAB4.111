@@ -1,17 +1,55 @@
 package com.example.lab4111;
 
-public class TextNote extends Note {
-    private String content;
-    public void setContent(String content){
-        this.content = content;
-    }
-    public String getContent(){
-        return content;
-    }
-    @Override
-    public void getSummary(){
 
-        System.out.println("Title : " + getTitle() + " Date : " + getCreatedDate() + " Content : " + content);
+public class TextNote {
+
+
+    String username;
+    String title;
+    String content;
+    String createdDate;
+
+
+
+    public void setUsername(String username){
+
+        this.username = username;
+
+    }
+
+
+
+    public void setTitle(String title){
+
+        this.title = title;
+
+    }
+
+
+
+    public void setContent(String content){
+
+        this.content = content;
+
+    }
+
+
+
+    public void setCreatedDate(String createdDate){
+
+        this.createdDate = createdDate;
+
+    }
+
+
+
+
+    public String getSummary(){
+
+        return "UserName : " + username + "\n" +
+                "Title : " + title + "\n" +
+                "Date : " + createdDate + "\n" +
+                "Content : " + content;
 
     }
 
