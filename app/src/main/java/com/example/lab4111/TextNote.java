@@ -1,7 +1,7 @@
 package com.example.lab4111;
 
 
-public class TextNote {
+public class TextNote extends Note {
 
 
     String username;

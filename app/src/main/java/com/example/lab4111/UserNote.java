@@ -10,9 +10,10 @@ public class UserNote {
     public void setNote(Note note){
         this.note = note;
     }
-    public void showNote(){
+    public TextNote showNote(){
         System.out.println("User : " + user.getUsername());
         note.getSummary();
 
+        return null;
     }
 }

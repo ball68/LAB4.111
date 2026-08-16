@@ -16,6 +16,6 @@ public abstract class Note {
     public void setCreatedDate(String createdDate) {
         this.createdDate = createdDate;
     }
-    public abstract void getSummary();
+    public abstract String getSummary();
 
 }

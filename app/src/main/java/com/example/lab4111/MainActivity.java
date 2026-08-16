@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
             });
         }
 
-        // 1. ปุ่ม Click Me
+
         clickMeButton = findViewById(R.id.button1);
         if (clickMeButton != null) {
             clickMeButton.setOnClickListener(v -> {
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             });
         }
 
-        // 2. ปุ่ม Add Note
+
         addNoteButton = findViewById(R.id.button2);
         if (addNoteButton != null) {
             addNoteButton.setOnClickListener(v -> {
