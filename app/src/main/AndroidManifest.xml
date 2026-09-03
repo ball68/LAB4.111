@@ -19,14 +19,22 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
         <!-- ⚠️ บรรทัดสำคัญ: ประกาศลงทะเบียน AddNoteActivity ตรงนี้ -->
-        <activity android:name=".AddNoteActivity" android:exported="true" />
-        <activity android:name=".ClickActivity" android:exported="true" />
-
+        <activity
+            android:name=".AddNoteActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ClickActivity"
+            android:exported="true" />
+        <activity
+            android:name=".BrowseNoteActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>
