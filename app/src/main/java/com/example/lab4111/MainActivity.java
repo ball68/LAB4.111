@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
             });
         }
 
-        // ผูก View จาก XML
+
         logo = findViewById(R.id.imageView);
         loadData = findViewById(R.id.loadData);
         clickMeButton = findViewById(R.id.button1);
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         if (browseNoteButton != null) {
             browseNoteButton.setOnClickListener(v -> {
 
-                // สั่งให้ ProgressBar แสดงตัวหมุนๆ
+
                 if (loadData != null) {
                     loadData.setVisibility(View.VISIBLE);
                 }
@@ -72,12 +72,12 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     runOnUiThread(() -> {
-                        // เมื่อโหลดเสร็จให้ซ่อน ProgressBar
+
                         if (loadData != null) {
                             loadData.setVisibility(View.GONE);
                         }
 
-                        // ย้ายหน้าไป BrowseNoteActivity
+
                         Intent intent = new Intent(MainActivity.this, BrowseNoteActivity.class);
                         startActivity(intent);
                     });
@@ -85,5 +85,5 @@ public class MainActivity extends AppCompatActivity {
 
             });
         }
-    } // <- วงเล็บปิด onCreate
-} // <- วงเล็บปิด Classฆ
+    }
+}

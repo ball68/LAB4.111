@@ -13,9 +13,13 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class BrowseNoteActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Executors;
 
-    private Button browseButton; // ปุ่มย้อนกลับ Back[cite: 2]
+public class BrowseNoteActivity extends AppCompatActivity {
+    private TextView showNote;
+    private Button browseButton;
     private EditText searchEditText;
     private Button searchButton;
     private ProgressBar searchProgressBar;
@@ -35,23 +39,43 @@ public class BrowseNoteActivity extends AppCompatActivity {
             });
         }
 
-        // ผูก View จาก XML
+        showNote = findViewById(R.id.textView4);
         browseButton = findViewById(R.id.button23); //[cite: 2]
         searchEditText = findViewById(R.id.searchEditText);
         searchButton = findViewById(R.id.searchButton);
         searchProgressBar = findViewById(R.id.searchProgressBar);
         resultTextView = findViewById(R.id.resultTextView);
 
-        // ปุ่มย้อนกลับ[cite: 2]
+        // โหลดข้อมูลจาก DB บน Background Thread
+        Executors.newSingleThreadExecutor().execute(() -> {
+            List<NoteEntity> entities = AppDatabase.getInstance(this).noteDao().getAll();
+            List<Note> notes = new ArrayList<>();
+            for (NoteEntity e : entities) {
+                Note note = NoteMapper.fromEntity(e);
+                if (note != null) {
+                    notes.add(note);
+                }
+            }
+
+            // แสดงผลบน UI thread
+            runOnUiThread(() -> {
+                StringBuilder sb = new StringBuilder();
+                for (Note n : notes) {
+                    sb.append(n.getSummary()).append("\n\n-------------------\n\n");
+                }
+                if (showNote != null) {
+                    showNote.setText(sb.toString());
+                }
+            });
+        });
+
         if (browseButton != null) { //[cite: 2]
             browseButton.setOnClickListener(v -> finish()); //[cite: 2]
         }
 
-        // โค้ดเมื่อคลิกปุ่มค้นหา
         if (searchButton != null) {
             searchButton.setOnClickListener(v -> {
 
-                // 1. ซ่อนข้อความผลลัพธ์เก่า และแสดง ProgressBar ขึ้นมาระหว่างรอ
                 if (resultTextView != null) {
                     resultTextView.setVisibility(View.GONE);
                 }
@@ -59,23 +83,18 @@ public class BrowseNoteActivity extends AppCompatActivity {
                     searchProgressBar.setVisibility(View.VISIBLE);
                 }
 
-                // 2. ใช้ Thread ในการจำลองการโหลดข้อมูล
                 new Thread(() -> {
                     try {
-                        // ดีเลย์ 2 วินาที (2000 ms)
                         Thread.sleep(2000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
 
-                    // 3. เมื่อโหลดเสร็จ ให้อัปเดต UI กลับมาใน Main Thread
                     runOnUiThread(() -> {
-                        // ซ่อน ProgressBar
                         if (searchProgressBar != null) {
                             searchProgressBar.setVisibility(View.GONE);
                         }
 
-                        // แสดงข้อความ "ไม่พบข้อมูล"
                         if (resultTextView != null) {
                             resultTextView.setText("ไม่พบข้อมูล");
                             resultTextView.setVisibility(View.VISIBLE);

@@ -13,7 +13,7 @@ public class CheckListNote extends Note {
 
     @Override
     public String getSummary(){
-        // คืนค่า String เพื่อนำไปแสดงใน TextView
+
         return "Title : " + getTitle() + "\nDate : " + getCreatedDate() + "\nItem : " + item;
     }
 }

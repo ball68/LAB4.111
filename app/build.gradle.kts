@@ -34,6 +34,12 @@ android {
 }
 
 dependencies {
+
+
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    implementation(libs.gson)
+    annotationProcessor(libs.room.compiler)
     implementation(libs.activity.ktx)
     implementation(libs.appcompat)
     implementation(libs.constraintlayout)
